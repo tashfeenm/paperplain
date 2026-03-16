@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>paperplain — arxiv papers, explained</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">paper<span class="logo-accent">plain</span></h1>
+            <p class="tagline">arxiv papers, explained for humans</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="search-section">
+            <div class="search-box">
+                <input
+                    type="text"
+                    id="paper-input"
+                    placeholder="Paste an arxiv URL or paper ID (e.g., 2408.09869)"
+                    autocomplete="off"
+                >
+                <button id="explain-btn" onclick="explainPaper()">
+                    Explain this paper
+                </button>
+            </div>
+            <p class="search-hint">
+                Supports URLs like <code>https://arxiv.org/abs/2408.09869</code> or just the ID <code>2408.09869</code>
+            </p>
+        </section>
+
+        <section id="error-section" class="error-section" style="display: none;">
+            <div class="error-box">
+                <strong>Something went wrong.</strong>
+                <p id="error-message"></p>
+            </div>
+        </section>
+
+        <section id="loading-section" class="loading-section" style="display: none;">
+            <div class="loading-box">
+                <div class="spinner"></div>
+                <div class="loading-text">
+                    <h3>Processing paper...</h3>
+                    <p id="loading-status">Fetching metadata from arxiv</p>
+                    <p class="loading-note">This typically takes 30-90 seconds. We're downloading the PDF, converting it to text, and generating an explanation.</p>
+                </div>
+            </div>
+        </section>
+
+        <article id="result-section" class="result-section" style="display: none;">
+            <div class="paper-header">
+                <h2 id="paper-title" class="paper-title"></h2>
+                <p id="paper-authors" class="paper-authors"></p>
+                <a id="paper-link" href="#" target="_blank" class="paper-link">View original paper on arxiv</a>
+            </div>
+
+            <div class="explanation">
+                <section class="explanation-block">
+                    <h3 class="section-label">TL;DR</h3>
+                    <div id="explanation-tldr" class="section-content tldr-content"></div>
+                </section>
+
+                <section class="explanation-block">
+                    <h3 class="section-label">The Idea</h3>
+                    <div id="explanation-idea" class="section-content"></div>
+                </section>
+
+                <section class="explanation-block">
+                    <h3 class="section-label">Why It Matters</h3>
+                    <div id="explanation-matters" class="section-content"></div>
+                </section>
+
+                <section class="explanation-block">
+                    <h3 class="section-label">What's Missing</h3>
+                    <div id="explanation-missing" class="section-content"></div>
+                </section>
+            </div>
+        </article>
+
+        <aside id="recent-section" class="recent-section">
+            <h3>Recently Explained</h3>
+            <ul id="recent-list" class="recent-list">
+                <!-- Populated by JS -->
+            </ul>
+        </aside>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="disclaimer">
+                AI-generated summary. May contain errors. Always refer to the
+                <a href="https://arxiv.org" target="_blank">original paper</a>.
+            </p>
+            <p class="credits">
+                Built with <a href="https://fastapi.tiangolo.com" target="_blank">FastAPI</a>,
+                <a href="https://ds4sd.github.io/docling/" target="_blank">Docling</a>, and
+                <a href="https://www.anthropic.com" target="_blank">Claude</a>.
+            </p>
+        </div>
+    </footer>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
