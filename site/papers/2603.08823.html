@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish Audio S2 Technical Report — paperplain</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo-link">
+                <h1 class="logo">paper<span class="logo-accent">plain</span></h1>
+            </a>
+            <p class="tagline">arxiv papers, explained for humans</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="result-section">
+            <div class="paper-header">
+                <h2 class="paper-title">Fish Audio S2 Technical Report</h2>
+                <p class="paper-authors">Shijia Liao, Yuxuan Wang, Songting Liu, Yifan Cheng, Ruoyi Zhang, Tianyu Li, Shidong Li, Yisheng Zheng, Xingwei Liu, Qingzheng Wang, Zhizhuo Zhou, Jiahua Liu, Xin Chen, Dawei Han</p>
+                <a href="https://arxiv.org/abs/2603.08823" target="_blank" class="paper-link">
+                    View original paper on arxiv (2603.08823)
+                </a>
+            </div>
+
+            <div class="explanation">
+                <section class="explanation-block">
+                    <h3 class="section-label">TL;DR</h3>
+                    <div class="section-content tldr-content">
+                    <p>Fish Audio S2 is an open-source text-to-speech system that can take written text and turn it into remarkably human-sounding speech, complete with laughs, whispers, emphasis, and emotional inflections -- all controlled through simple natural-language instructions embedded in the text. It supports over 80 languages, can clone a voice from a short audio sample, handle multi-speaker dialogues in a single pass, and generate long-form audio that stays consistent. In head-to-head comparisons judged by both AI evaluators and human listeners, it proved competitive with leading commercial systems, matching or beating them on several key benchmarks.</p>
+                    </div>
+                </section>
+
+                <section class="explanation-block">
+                    <h3 class="section-label">The Idea</h3>
+                    <div class="section-content">
+                    <p>Today&#x27;s best text-to-speech systems can read text aloud clearly, but getting them to sound truly human -- with natural laughs, hesitations, whispers, and emotional shifts at exactly the right moments -- remains a hard problem. Fish Audio S2 tackles this by letting users embed plain-English instructions like [laugh], [whisper], or [angry] directly into the text, telling the system exactly where and how to modulate the voice. Think of it like writing stage directions in a screenplay: instead of just the dialogue, you include cues that tell the actor how to deliver each line.</p>
+                    <p>The system is built on a &quot;Dual Autoregressive&quot; architecture, which splits the problem of generating speech into two parts. A large language model (based on Qwen3-4B, with 4 billion parameters) handles the &quot;what&quot; -- planning out the broad strokes of what the speech should sound like over time, choosing high-level sound tokens the way a conductor sets the tempo and dynamics. A much smaller, lightweight network then fills in the fine acoustic details for each moment, like the individual musicians playing their parts. This split keeps generation fast: the system produces audio 5 times faster than real-time and starts outputting sound in under 100 milliseconds.</p>
+                    <p>The key insight is in how they trained the system. The team built a data pipeline that processes over 10 million hours of raw audio across roughly 80 languages and dialects. First it cleans and segments the audio, then a quality-scoring model filters out anything noisy or low-fidelity, and finally a specialized transcription model annotates the audio with rich descriptions of vocal events -- noting where someone laughed, whispered, or shifted emotion. Here is the clever part: those same quality and transcription models are then reused as &quot;reward judges&quot; during a reinforcement learning phase, where the system practices generating speech and gets scored on how accurate, natural-sounding, and voice-consistent the output is. Because the judges and the training data come from the same pipeline, there is no mismatch between what the system learned and what it is being graded on.</p>
+                    <p>The reinforcement learning approach itself borrows from techniques proven in large language models (a variant of GRPO, from the DeepSeekMath line of research). The system generates multiple candidate audio outputs for each prompt, scores them across three dimensions -- did it say the right words, does it sound good, and does it sound like the target voice -- and uses those scores to push the model toward better outputs. This multi-dimensional reward system prevents the common failure modes of AI speech: hallucinated words, skipped content, and voices that drift mid-sentence.</p>
+                    </div>
+                </section>
+
+                <section class="explanation-block">
+                    <h3 class="section-label">Why It Matters</h3>
+                    <div class="section-content">
+                    <p>This is one of the most capable open-source text-to-speech systems released to date, and the &quot;open-source&quot; part matters enormously. Until now, the most natural-sounding and controllable speech synthesis was locked behind commercial APIs from companies like OpenAI, Google, and ElevenLabs. Fish Audio S2 puts comparable quality into the hands of any developer or researcher who wants to build on it. The model weights, fine-tuning code, and production-ready inference engine are all publicly available.</p>
+                    <p>The practical applications are broad: audiobook production where a narrator needs to convey emotion and character voices, video game dialogue systems, real-time voice assistants that actually sound engaged rather than robotic, accessible content creation in dozens of languages, and podcast generation with multiple distinct speakers. The system&#x27;s ability to clone a voice from a short sample and then generate extended, emotionally nuanced speech in that voice -- across 80+ languages -- opens doors for personalized content at scale. Its sub-100ms latency and streaming capability also make it viable for real-time conversational AI, not just batch audio generation.</p>
+                    </div>
+                </section>
+
+                <section class="explanation-block">
+                    <h3 class="section-label">What's Missing</h3>
+                    <div class="section-content">
+                    <p>The paper is forthright about some limitations but glosses over others. On the benchmark front, the team created their own &quot;Fish Audio Instruction Benchmark&quot; to evaluate fine-grained control -- which is useful, but self-designed benchmarks always carry a risk of favoring the system they were built alongside. The human-model alignment validation for this benchmark shows only &quot;moderate agreement&quot; (Cohen&#x27;s kappa of 0.47 for acoustic-event detection) between the AI judge (Gemini 3 Pro) and human evaluators, which means the automated scores should be taken with some caution.</p>
+                    <p>The paper also does not deeply address failure modes or safety concerns. Voice cloning technology this accessible raises obvious questions about deepfakes, impersonation, and consent -- topics the report barely touches. There is no discussion of watermarking, detection mechanisms, or usage policies. On the technical side, the system still struggles with certain low-resource languages (Hindi, Romanian, Vietnamese show notably higher error rates), and while it handles long-form audio better than competitors, in long-form evaluations, outputs were capped at approximately 185 seconds due to context length limitations. Finally, the reinforcement learning results show improvement, but the paper provides limited ablation studies to isolate exactly how much each component of the reward system contributes versus the architecture or the sheer scale of training data.</p>
+                    </div>
+                </section>
+            </div>
+        </article>
+
+        <div class="back-link">
+            <a href="../index.html">&larr; All papers</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="disclaimer">
+                AI-generated summary, peer-reviewed by multiple AI models. May contain errors.
+                Always refer to the <a href="https://arxiv.org/abs/2603.08823" target="_blank">original paper</a>.
+            </p>
+            <p class="credits">
+                Built with <a href="https://ds4sd.github.io/docling/" target="_blank">Docling</a>
+                and <a href="https://www.anthropic.com" target="_blank">Claude</a>.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

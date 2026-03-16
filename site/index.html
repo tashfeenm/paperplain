@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>paperplain — arxiv papers, explained</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">paper<span class="logo-accent">plain</span></h1>
+            <p class="tagline">arxiv papers, explained for humans</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h2>Complex research, plainly explained</h2>
+            <p>Each paper is converted from PDF, explained by AI, and peer-reviewed
+            by multiple AI models for accuracy. Always check the original.</p>
+        </section>
+
+        <section class="papers-grid">
+
+            <a href="papers/2603.01068.html" class="paper-card">
+                <div class="card-id">2603.01068</div>
+                <h3 class="card-title">LLaDA-o: An Effective and Length-Adaptive Omni Diffusion Model</h3>
+                <p class="card-authors">Zebin You, Xiaolu Zhang, Jun Zhou + 2 more</p>
+                <p class="card-tldr">Most AI models that can both understand images and generate new ones use a single approach for everything, which creates conflicts because text and images are fundamentally different kinds of data. LL...</p>
+            </a>
+
+            <a href="papers/2603.01896.html" class="paper-card">
+                <div class="card-id">2603.01896</div>
+                <h3 class="card-title">Agentic Code Reasoning</h3>
+                <p class="card-authors">Shubham Ugare, Satish Chandra</p>
+                <p class="card-tldr">When AI agents try to understand code, they often take shortcuts -- guessing what a function does based on its name instead of actually tracing through the logic. Researchers at Meta found that giving...</p>
+            </a>
+
+            <a href="papers/2603.08823.html" class="paper-card">
+                <div class="card-id">2603.08823</div>
+                <h3 class="card-title">Fish Audio S2 Technical Report</h3>
+                <p class="card-authors">Shijia Liao, Yuxuan Wang, Songting Liu + 11 more</p>
+                <p class="card-tldr">Fish Audio S2 is an open-source text-to-speech system that can take written text and turn it into remarkably human-sounding speech, complete with laughs, whispers, emphasis, and emotional inflections ...</p>
+            </a>
+
+            <a href="papers/2603.10088.html" class="paper-card">
+                <div class="card-id">2603.10088</div>
+                <h3 class="card-title">ES-dLLM: Efficient Inference for Diffusion Large Language Models by Early-Skipping</h3>
+                <p class="card-authors">Zijian Zhu, Fei Ren, Zhanhong Tan + 1 more</p>
+                <p class="card-tldr">Most AI language models today generate text one word at a time, left to right. A newer breed called diffusion language models works differently -- they start with a bunch of blank slots and gradually ...</p>
+            </a>
+
+            <a href="papers/2603.11808.html" class="paper-card">
+                <div class="card-id">2603.11808</div>
+                <h3 class="card-title">Automating Skill Acquisition through Large-Scale Mining of Open-Source Agentic Repositories: A Framework for Multi-Agent Procedural Knowledge Extraction</h3>
+                <p class="card-authors">Shuzhen Bi, Mengsong Wu, Hao Hao + 5 more</p>
+                <p class="card-tldr">AI assistants like ChatGPT are good generalists, but they struggle with specialized tasks that require step-by-step expertise. This paper proposes a system that automatically mines open-source code re...</p>
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="disclaimer">
+                AI-generated summaries, peer-reviewed by multiple AI models.
+                May contain errors. Always refer to the
+                <a href="https://arxiv.org" target="_blank">original papers</a>.
+            </p>
+            <p class="credits">
+                Built with <a href="https://ds4sd.github.io/docling/" target="_blank">Docling</a>
+                and <a href="https://www.anthropic.com" target="_blank">Claude</a>.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

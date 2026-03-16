@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLaDA-o: An Effective and Length-Adaptive Omni Diffusion Model — paperplain</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo-link">
+                <h1 class="logo">paper<span class="logo-accent">plain</span></h1>
+            </a>
+            <p class="tagline">arxiv papers, explained for humans</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="result-section">
+            <div class="paper-header">
+                <h2 class="paper-title">LLaDA-o: An Effective and Length-Adaptive Omni Diffusion Model</h2>
+                <p class="paper-authors">Zebin You, Xiaolu Zhang, Jun Zhou, Chongxuan Li, Ji-Rong Wen</p>
+                <a href="https://arxiv.org/abs/2603.01068" target="_blank" class="paper-link">
+                    View original paper on arxiv (2603.01068)
+                </a>
+            </div>
+
+            <div class="explanation">
+                <section class="explanation-block">
+                    <h3 class="section-label">TL;DR</h3>
+                    <div class="section-content tldr-content">
+                    <p>Most AI models that can both understand images and generate new ones use a single approach for everything, which creates conflicts because text and images are fundamentally different kinds of data. LLaDA-o solves this by using two specialized &quot;experts&quot; under one roof -- one handles text using a technique called masked diffusion (think: filling in blanks), and another handles image creation using continuous diffusion (think: gradually sharpening a blurry picture). The result is a single model that understands images, answers questions about them, and generates new images from text descriptions, achieving state-of-the-art results among diffusion-based models on major benchmarks.</p>
+                    </div>
+                </section>
+
+                <section class="explanation-block">
+                    <h3 class="section-label">The Idea</h3>
+                    <div class="section-content">
+                    <p>Today&#x27;s most capable AI models aspire to be &quot;omni&quot; -- able to both understand existing images (answering questions like &quot;what time does this clock show?&quot;) and generate new ones from text descriptions. The dominant approach uses autoregressive models, which generate one piece at a time, left to right, like writing a sentence word by word. But a newer family of models based on &quot;diffusion&quot; -- which works more like a sculptor gradually revealing a statue from a block of marble -- has been gaining ground. The problem is that text and images naturally prefer different flavors of diffusion. Text works best with &quot;masked diffusion,&quot; where you start with a sentence full of blanks and iteratively fill them in. Images work best with &quot;continuous diffusion,&quot; where you start with pure noise and progressively sharpen it into a clear picture. Naively forcing both into the same process creates training conflicts -- like asking one student to simultaneously study for a math exam and a poetry recital using the same study method.</p>
+                    <p>LLaDA-o introduces what the authors call &quot;Mixture of Diffusion&quot; (MoD). Think of it as a company with two specialist departments that share a common conference room. The &quot;understanding expert&quot; handles text and image comprehension using masked diffusion -- it sees an image, encodes it, and reasons about it alongside text. The &quot;generation expert&quot; handles image creation using continuous diffusion -- it takes text descriptions and produces visual output. Both experts share the same core attention mechanism (the conference room), which lets them communicate and coordinate, but they each use their own specialized tools for their respective jobs.</p>
+                    <p>On top of this, the team tackled a practical annoyance: most diffusion text models require you to decide in advance exactly how long the output will be. LLaDA-o uses a clever training trick called &quot;adaptive length augmentation.&quot; During training, they randomly add extra end-of-sentence tokens to some responses and randomly truncate others. This teaches the model to naturally stop when it has said enough, rather than rigidly filling a pre-set number of slots. At inference time, the model generates text in blocks and stops when it confidently produces an end-of-sequence token -- no architectural changes needed.</p>
+                    <p>The model also includes an efficient attention design that avoids redundant computation. When generating a response to an image, the image doesn&#x27;t change between denoising steps, so its representation is computed once and cached. This yields a 5.9x speedup over the previous state-of-the-art approach.</p>
+                    </div>
+                </section>
+
+                <section class="explanation-block">
+                    <h3 class="section-label">Why It Matters</h3>
+                    <div class="section-content">
+                    <p>LLaDA-o demonstrates that diffusion-based models can seriously compete with autoregressive models for unified multimodal tasks. On DPG-Bench, a demanding benchmark for generating images from long, detailed text descriptions, LLaDA-o scores 87.04 -- beating every previous model tested on that benchmark, including dedicated image generators like FLUX and unified models like BAGEL. On the understanding side, it achieves state-of-the-art aggregate results among omni-diffusion models, with particular strength in mathematical reasoning and document understanding benchmarks.</p>
+                    <p>The practical significance goes beyond benchmark numbers. Diffusion models offer inherent advantages over autoregressive ones: they can generate multiple parts of an output simultaneously (parallelism), they naturally support bidirectional context (seeing the full picture rather than just what came before), and they allow users to trade off speed versus quality by adjusting a confidence threshold (a setting that controls how sure the model must be before committing to a word). If diffusion-based language models continue to improve -- and LLaDA-o suggests they will -- we could see a meaningful architectural alternative to the autoregressive paradigm that dominates today&#x27;s ChatGPT-style systems. The variable-length generation capability also removes a key practical limitation that has held back diffusion text models from real-world deployment.</p>
+                    </div>
+                </section>
+
+                <section class="explanation-block">
+                    <h3 class="section-label">What's Missing</h3>
+                    <div class="section-content">
+                    <p>The paper is candid that LLaDA-o still trails the best autoregressive unified models, particularly BAGEL, on understanding tasks. The authors attribute this to the weaker language backbone -- LLaDA-o builds on a comparatively smaller language backbone (LLaDA-8B) while BAGEL uses the stronger Qwen2.5-7B. This is a fair point, but it also means the headline results are partly a function of the underlying language model&#x27;s limitations, not just the MoD architecture. It remains to be seen how much of the gap closes with a stronger backbone versus how much is inherent to the diffusion approach.</p>
+                    <p>The training cost is substantial -- roughly 87,500 GPU hours across H800 and A100 hardware -- which limits reproducibility for most research groups despite the code being open-sourced. The paper also focuses exclusively on image understanding and generation, leaving out other modalities like audio or video. The adaptive length strategy, while effective, is only demonstrated for text output; whether similar tricks work for variable-resolution or variable-length image generation is unexplored. Finally, the evaluation uses standard academic benchmarks, and there is no human preference study or assessment of failure modes -- areas where benchmark scores can sometimes paint a rosier picture than real-world usage would reveal.</p>
+                    </div>
+                </section>
+            </div>
+        </article>
+
+        <div class="back-link">
+            <a href="../index.html">&larr; All papers</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="disclaimer">
+                AI-generated summary, peer-reviewed by multiple AI models. May contain errors.
+                Always refer to the <a href="https://arxiv.org/abs/2603.01068" target="_blank">original paper</a>.
+            </p>
+            <p class="credits">
+                Built with <a href="https://ds4sd.github.io/docling/" target="_blank">Docling</a>
+                and <a href="https://www.anthropic.com" target="_blank">Claude</a>.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

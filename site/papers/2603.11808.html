@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automating Skill Acquisition through Large-Scale Mining of Open-Source Agentic Repositories: A Framework for Multi-Agent Procedural Knowledge Extraction — paperplain</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo-link">
+                <h1 class="logo">paper<span class="logo-accent">plain</span></h1>
+            </a>
+            <p class="tagline">arxiv papers, explained for humans</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="result-section">
+            <div class="paper-header">
+                <h2 class="paper-title">Automating Skill Acquisition through Large-Scale Mining of Open-Source Agentic Repositories: A Framework for Multi-Agent Procedural Knowledge Extraction</h2>
+                <p class="paper-authors">Shuzhen Bi, Mengsong Wu, Hao Hao, Keqian Li, Wentao Liu, Siyu Song, Hongbo Zhao, Aimin Zhou</p>
+                <a href="https://arxiv.org/abs/2603.11808" target="_blank" class="paper-link">
+                    View original paper on arxiv (2603.11808)
+                </a>
+            </div>
+
+            <div class="explanation">
+                <section class="explanation-block">
+                    <h3 class="section-label">TL;DR</h3>
+                    <div class="section-content tldr-content">
+                    <p>AI assistants like ChatGPT are good generalists, but they struggle with specialized tasks that require step-by-step expertise. This paper proposes a system that automatically mines open-source code repositories on GitHub to extract reusable &quot;skills&quot; -- packaged bundles of know-how that any AI agent can pick up and use without retraining the entire model. Think of it like building a library of recipe cards that any chef can follow, instead of trying to teach every chef every dish from scratch. The researchers demonstrate this by extracting educational video-making skills from two existing projects, whose own benchmarks show 40% better knowledge transfer than baseline approaches.</p>
+                    </div>
+                </section>
+
+                <section class="explanation-block">
+                    <h3 class="section-label">The Idea</h3>
+                    <div class="section-content">
+                    <p>Today&#x27;s large language models know a lot of facts, but they often fumble when asked to execute a complex, multi-step procedure -- like generating an animated math tutorial or debugging a visualization pipeline. The traditional fix is to retrain or fine-tune the model, which is expensive and slow. This paper proposes a different approach: instead of baking expertise into the model&#x27;s weights, package it as a portable &quot;skill file&quot; that any AI agent can load on demand. It is the difference between surgically implanting a memory versus handing someone an instruction manual.</p>
+                    <p>The framework works in three stages. First, a tool maps out the structure of a GitHub repository -- its scripts, config files, and documentation -- to understand how the codebase is organized. Second, a retrieval system uses embedding-based search (similar to how search engines match queries to documents) to identify reusable procedural patterns buried in the code. It looks for logic that is recurring, non-obvious, and generalizable -- not just one-off hacks. Third, these patterns are translated into a standardized format called SKILL.md, which has three layers: lightweight metadata (so agents know the skill exists), detailed instructions (loaded only when needed), and bundled scripts and templates (loaded on demand). This layered design is clever because an agent can be aware of thousands of skills without clogging its limited working memory.</p>
+                    <p>The researchers demonstrate this pipeline on two real projects: TheoremExplainAgent, which generates animated video explanations of math and science theorems, and Code2Video, which turns code into educational videos. From these, they extract skills like &quot;Visual Theorem Walkthrough&quot; (generate step-by-step animated proofs) and &quot;Visual Layout Critic&quot; (automatically check whether a rendered frame has overlapping text or cluttered elements). Both skills are packaged as portable, reusable units that any compatible AI agent can pick up.</p>
+                    <p>A notable contribution is the security governance framework. Since skills are mined from public repositories, they could contain malicious code. The paper proposes a four-stage verification pipeline: static analysis (scanning for dangerous patterns like eval()), semantic classification (using an LLM to check for hidden prompt injections), sandboxed execution (running scripts in an isolated container), and permission validation (ensuring the skill only accesses what it claims to need). Skills graduate through trust tiers based on verified safe operation -- similar to how app stores review submissions before publishing.</p>
+                    </div>
+                </section>
+
+                <section class="explanation-block">
+                    <h3 class="section-label">Why It Matters</h3>
+                    <div class="section-content">
+                    <p>This work addresses a real bottleneck in making AI agents practically useful. Right now, giving an AI assistant a new specialized capability typically means either retraining the model (expensive, slow, requires expertise) or writing custom integrations (labor-intensive, fragile). If you could instead point a system at GitHub and have it automatically extract, package, and verify reusable skills, you dramatically lower the cost of making agents competent in new domains. Domain experts who build great open-source tools -- but never intended them for AI consumption -- suddenly become indirect contributors to the AI skill ecosystem.</p>
+                    <p>The educational content angle is particularly compelling. The paper shows that agent-generated tutorial videos, built using extracted skills, achieve 40% better knowledge transfer than baseline approaches. If these results hold broadly, it could accelerate the creation of high-quality STEM education materials -- especially for topics where human-crafted tutorials are scarce or outdated. More broadly, the SKILL.md standard and the extraction pipeline together sketch a future where AI capabilities grow through a package-manager-like ecosystem: discover, install, verify, compose. That is a meaningfully different scaling story than &quot;train a bigger model.&quot;</p>
+                    </div>
+                </section>
+
+                <section class="explanation-block">
+                    <h3 class="section-label">What's Missing</h3>
+                    <div class="section-content">
+                    <p>The paper&#x27;s demonstration is narrow. Both source repositories (TheoremExplainAgent and Code2Video) are in the same domain -- Manim-based educational animation -- and were likely chosen because their code is well-structured and their outputs are easy to evaluate. The framework&#x27;s effectiveness on messier, less-documented repositories (which is most of GitHub) remains unproven. The 40% knowledge transfer improvement comes from the Code2Video paper&#x27;s own benchmark (TeachQuiz), not from an independent evaluation of the extraction pipeline itself, so it is hard to attribute that gain specifically to the skill extraction process.</p>
+                    <p>The security governance framework, while sensible in design, is described at an architectural level without empirical validation. The paper cites a statistic that 26.1% of community-distributed skills contain vulnerabilities, but does not report how well the proposed four-stage pipeline catches them. The dense retrieval approach for identifying latent skills also lacks quantitative evaluation -- there are no precision/recall numbers showing how accurately the system distinguishes genuinely reusable patterns from project-specific code. Finally, the paper does not address skill maintenance: open-source libraries evolve, APIs break, and dependencies shift. How extracted skills stay current as their source repositories change is an open question the paper acknowledges only in passing.</p>
+                    </div>
+                </section>
+            </div>
+        </article>
+
+        <div class="back-link">
+            <a href="../index.html">&larr; All papers</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="disclaimer">
+                AI-generated summary, peer-reviewed by multiple AI models. May contain errors.
+                Always refer to the <a href="https://arxiv.org/abs/2603.11808" target="_blank">original paper</a>.
+            </p>
+            <p class="credits">
+                Built with <a href="https://ds4sd.github.io/docling/" target="_blank">Docling</a>
+                and <a href="https://www.anthropic.com" target="_blank">Claude</a>.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

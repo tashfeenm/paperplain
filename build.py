@@ -1,0 +1,211 @@
+#!/usr/bin/env python3
+"""Build static HTML site from content/papers/*.json."""
+
+import json
+import html
+import sys
+from pathlib import Path
+
+CONTENT_DIR = Path("content/papers")
+SITE_DIR = Path("site")
+PAPERS_DIR = SITE_DIR / "papers"
+
+def escape(text: str) -> str:
+    return html.escape(text)
+
+def text_to_paragraphs(text: str) -> str:
+    paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
+    return "\n".join(f"                    <p>{escape(p)}</p>" for p in paragraphs)
+
+def build_paper_page(paper: dict) -> str:
+    arxiv_id = paper["arxiv_id"]
+    title = escape(paper["title"])
+    authors = escape(", ".join(paper["authors"]))
+    arxiv_url = f"https://arxiv.org/abs/{arxiv_id}"
+    ex = paper["explanation"]
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} — paperplain</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo-link">
+                <h1 class="logo">paper<span class="logo-accent">plain</span></h1>
+            </a>
+            <p class="tagline">arxiv papers, explained for humans</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="result-section">
+            <div class="paper-header">
+                <h2 class="paper-title">{title}</h2>
+                <p class="paper-authors">{authors}</p>
+                <a href="{arxiv_url}" target="_blank" class="paper-link">
+                    View original paper on arxiv ({escape(arxiv_id)})
+                </a>
+            </div>
+
+            <div class="explanation">
+                <section class="explanation-block">
+                    <h3 class="section-label">TL;DR</h3>
+                    <div class="section-content tldr-content">
+{text_to_paragraphs(ex["tldr"])}
+                    </div>
+                </section>
+
+                <section class="explanation-block">
+                    <h3 class="section-label">The Idea</h3>
+                    <div class="section-content">
+{text_to_paragraphs(ex["the_idea"])}
+                    </div>
+                </section>
+
+                <section class="explanation-block">
+                    <h3 class="section-label">Why It Matters</h3>
+                    <div class="section-content">
+{text_to_paragraphs(ex["why_it_matters"])}
+                    </div>
+                </section>
+
+                <section class="explanation-block">
+                    <h3 class="section-label">What's Missing</h3>
+                    <div class="section-content">
+{text_to_paragraphs(ex["whats_missing"])}
+                    </div>
+                </section>
+            </div>
+        </article>
+
+        <div class="back-link">
+            <a href="../index.html">&larr; All papers</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="disclaimer">
+                AI-generated summary, peer-reviewed by multiple AI models. May contain errors.
+                Always refer to the <a href="{arxiv_url}" target="_blank">original paper</a>.
+            </p>
+            <p class="credits">
+                Built with <a href="https://ds4sd.github.io/docling/" target="_blank">Docling</a>
+                and <a href="https://www.anthropic.com" target="_blank">Claude</a>.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>"""
+
+
+def build_index_page(papers: list[dict]) -> str:
+    cards = []
+    for p in papers:
+        arxiv_id = escape(p["arxiv_id"])
+        title = escape(p["title"])
+        authors = escape(", ".join(p["authors"][:3]))
+        if len(p["authors"]) > 3:
+            authors += f" + {len(p['authors']) - 3} more"
+        tldr = escape(p["explanation"]["tldr"][:200])
+        if len(p["explanation"]["tldr"]) > 200:
+            tldr += "..."
+
+        cards.append(f"""
+            <a href="papers/{arxiv_id}.html" class="paper-card">
+                <div class="card-id">{arxiv_id}</div>
+                <h3 class="card-title">{title}</h3>
+                <p class="card-authors">{authors}</p>
+                <p class="card-tldr">{tldr}</p>
+            </a>""")
+
+    cards_html = "\n".join(cards)
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>paperplain — arxiv papers, explained</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">paper<span class="logo-accent">plain</span></h1>
+            <p class="tagline">arxiv papers, explained for humans</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h2>Complex research, plainly explained</h2>
+            <p>Each paper is converted from PDF, explained by AI, and peer-reviewed
+            by multiple AI models for accuracy. Always check the original.</p>
+        </section>
+
+        <section class="papers-grid">
+{cards_html}
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="disclaimer">
+                AI-generated summaries, peer-reviewed by multiple AI models.
+                May contain errors. Always refer to the
+                <a href="https://arxiv.org" target="_blank">original papers</a>.
+            </p>
+            <p class="credits">
+                Built with <a href="https://ds4sd.github.io/docling/" target="_blank">Docling</a>
+                and <a href="https://www.anthropic.com" target="_blank">Claude</a>.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>"""
+
+
+def main():
+    if not CONTENT_DIR.exists():
+        print("No content/papers/ directory found.")
+        sys.exit(1)
+
+    json_files = sorted(CONTENT_DIR.glob("*.json"))
+    if not json_files:
+        print("No paper JSON files found in content/papers/.")
+        sys.exit(1)
+
+    PAPERS_DIR.mkdir(parents=True, exist_ok=True)
+
+    papers = []
+    for f in json_files:
+        paper = json.loads(f.read_text())
+        papers.append(paper)
+
+        page_html = build_paper_page(paper)
+        out_path = PAPERS_DIR / f"{paper['arxiv_id']}.html"
+        out_path.write_text(page_html)
+        print(f"  Built {out_path}")
+
+    index_html = build_index_page(papers)
+    index_path = SITE_DIR / "index.html"
+    index_path.write_text(index_html)
+    print(f"  Built {index_path}")
+
+    print(f"\nDone. {len(papers)} papers built. Serve with: python -m http.server -d site")
+
+
+if __name__ == "__main__":
+    main()

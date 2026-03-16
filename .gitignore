@@ -2,9 +2,10 @@
 __pycache__/
 *.pyc
 *.pyo
-data/
 .venv/
 *.egg-info/
 dist/
 build/
 .DS_Store
+content/raw/
+content/*.clean.md
