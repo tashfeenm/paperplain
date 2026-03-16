@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 CONTENT_DIR = Path("content/papers")
-SITE_DIR = Path("site")
+SITE_DIR = Path("docs")
 PAPERS_DIR = SITE_DIR / "papers"
 
 def escape(text: str) -> str:
@@ -206,7 +206,7 @@ def main():
     index_path.write_text(index_html)
     print(f"  Built {index_path}")
 
-    print(f"\nDone. {len(papers)} papers built. Serve with: python -m http.server -d site")
+    print(f"\nDone. {len(papers)} papers built. Serve with: python -m http.server -d docs")
 
 
 if __name__ == "__main__":
