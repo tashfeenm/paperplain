@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LLaDA-o: An Effective and Length-Adaptive Omni Diffusion Model — paperplain</title>
+    <meta name="description" content="Most AI models that can both understand images and generate new ones use a single approach for everything, which creates conflicts because text and images are fundamentally different kinds of data....">
+    <meta property="og:title" content="LLaDA-o: An Effective and Length-Adaptive Omni Diffusion Model — paperplain">
+    <meta property="og:description" content="Most AI models that can both understand images and generate new ones use a single approach for everything, which creates conflicts because text and images are fundamentally different kinds of data....">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://tashfeenm.github.io/paperplain/papers/2603.01068.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="LLaDA-o: An Effective and Length-Adaptive Omni Diffusion Model — paperplain">
+    <meta name="twitter:description" content="Most AI models that can both understand images and generate new ones use a single approach for everything, which creates conflicts because text and images are fundamentally different kinds of data....">
+    <link rel="canonical" href="https://tashfeenm.github.io/paperplain/papers/2603.01068.html">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,24 +30,39 @@
     </header>
 
     <main class="container">
+        <div class="top-nav">
+            <a href="../index.html">&larr; All papers</a>
+        </div>
+
         <article class="result-section">
             <div class="paper-header">
+                <div class="paper-meta">
+                    <span class="category-tag">Multimodal AI</span>
+                    <span class="paper-date">March 2026</span>
+                </div>
                 <h2 class="paper-title">LLaDA-o: An Effective and Length-Adaptive Omni Diffusion Model</h2>
                 <p class="paper-authors">Zebin You, Xiaolu Zhang, Jun Zhou, Chongxuan Li, Ji-Rong Wen</p>
-                <a href="https://arxiv.org/abs/2603.01068" target="_blank" class="paper-link">
-                    View original paper on arxiv (2603.01068)
+                <a href="https://arxiv.org/abs/2603.01068" target="_blank" rel="noopener" class="paper-link">
+                    View original paper on arxiv &nearr;
                 </a>
             </div>
 
+            <nav class="section-toc" aria-label="Sections">
+                <a href="#tldr">TL;DR</a>
+                <a href="#the-idea">The Idea</a>
+                <a href="#why-it-matters">Why It Matters</a>
+                <a href="#whats-missing">What's Missing</a>
+            </nav>
+
             <div class="explanation">
-                <section class="explanation-block">
+                <section id="tldr" class="explanation-block">
                     <h3 class="section-label">TL;DR</h3>
                     <div class="section-content tldr-content">
                     <p>Most AI models that can both understand images and generate new ones use a single approach for everything, which creates conflicts because text and images are fundamentally different kinds of data. LLaDA-o solves this by using two specialized &quot;experts&quot; under one roof -- one handles text using a technique called masked diffusion (think: filling in blanks), and another handles image creation using continuous diffusion (think: gradually sharpening a blurry picture). The result is a single model that understands images, answers questions about them, and generates new images from text descriptions, achieving state-of-the-art results among diffusion-based models on major benchmarks.</p>
                     </div>
                 </section>
 
-                <section class="explanation-block">
+                <section id="the-idea" class="explanation-block">
                     <h3 class="section-label">The Idea</h3>
                     <div class="section-content">
                     <p>Today&#x27;s most capable AI models aspire to be &quot;omni&quot; -- able to both understand existing images (answering questions like &quot;what time does this clock show?&quot;) and generate new ones from text descriptions. The dominant approach uses autoregressive models, which generate one piece at a time, left to right, like writing a sentence word by word. But a newer family of models based on &quot;diffusion&quot; -- which works more like a sculptor gradually revealing a statue from a block of marble -- has been gaining ground. The problem is that text and images naturally prefer different flavors of diffusion. Text works best with &quot;masked diffusion,&quot; where you start with a sentence full of blanks and iteratively fill them in. Images work best with &quot;continuous diffusion,&quot; where you start with pure noise and progressively sharpen it into a clear picture. Naively forcing both into the same process creates training conflicts -- like asking one student to simultaneously study for a math exam and a poetry recital using the same study method.</p>
@@ -47,7 +72,7 @@
                     </div>
                 </section>
 
-                <section class="explanation-block">
+                <section id="why-it-matters" class="explanation-block">
                     <h3 class="section-label">Why It Matters</h3>
                     <div class="section-content">
                     <p>LLaDA-o demonstrates that diffusion-based models can seriously compete with autoregressive models for unified multimodal tasks. On DPG-Bench, a demanding benchmark for generating images from long, detailed text descriptions, LLaDA-o scores 87.04 -- beating every previous model tested on that benchmark, including dedicated image generators like FLUX and unified models like BAGEL. On the understanding side, it achieves state-of-the-art aggregate results among omni-diffusion models, with particular strength in mathematical reasoning and document understanding benchmarks.</p>
@@ -55,7 +80,7 @@
                     </div>
                 </section>
 
-                <section class="explanation-block">
+                <section id="whats-missing" class="explanation-block">
                     <h3 class="section-label">What's Missing</h3>
                     <div class="section-content">
                     <p>The paper is candid that LLaDA-o still trails the best autoregressive unified models, particularly BAGEL, on understanding tasks. The authors attribute this to the weaker language backbone -- LLaDA-o builds on a comparatively smaller language backbone (LLaDA-8B) while BAGEL uses the stronger Qwen2.5-7B. This is a fair point, but it also means the headline results are partly a function of the underlying language model&#x27;s limitations, not just the MoD architecture. It remains to be seen how much of the gap closes with a stronger backbone versus how much is inherent to the diffusion approach.</p>
@@ -65,20 +90,28 @@
             </div>
         </article>
 
-        <div class="back-link">
-            <a href="../index.html">&larr; All papers</a>
+        <div class="paper-footer-meta">
+            <p>Explained 2026-03-16 using Claude Opus.
+            Found an error? <a href="https://github.com/tashfeenm/paperplain/issues/new?title=Error+in+2603.01068&labels=correction" target="_blank" rel="noopener">Report it</a>.</p>
         </div>
+
+        <nav class="prev-next-nav" aria-label="Paper navigation">
+            <span class="nav-prev"></span>
+            <a href="2603.01896.html" class="nav-next" title="Agentic Code Reasoning">Next &rarr;</a>
+        </nav>
     </main>
 
     <footer>
         <div class="container">
             <p class="disclaimer">
-                Generated by <a href="https://www.anthropic.com" target="_blank">Claude</a>, reviewed by an AI council. May contain errors.
-                Always refer to the <a href="https://arxiv.org/abs/2603.01068" target="_blank">original paper</a>.
+                Generated by <a href="https://www.anthropic.com" target="_blank" rel="noopener">Claude</a>, reviewed by an AI council. May contain errors.
+                Always refer to the <a href="https://arxiv.org/abs/2603.01068" target="_blank" rel="noopener">original paper</a>.
             </p>
             <p class="credits">
-                Built with <a href="https://ds4sd.github.io/docling/" target="_blank">Docling</a>
-                and <a href="https://www.anthropic.com" target="_blank">Claude</a>.
+                <a href="https://github.com/tashfeenm/paperplain" target="_blank" rel="noopener">GitHub</a> &middot;
+                <a href="../feed.xml">RSS</a> &middot;
+                Built with <a href="https://ds4sd.github.io/docling/" target="_blank" rel="noopener">Docling</a>
+                + <a href="https://www.anthropic.com" target="_blank" rel="noopener">Claude</a>
             </p>
         </div>
     </footer>

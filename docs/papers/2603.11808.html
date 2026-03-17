@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Automating Skill Acquisition through Large-Scale Mining of Open-Source Agentic Repositories: A Framework for Multi-Agent Procedural Knowledge Extraction — paperplain</title>
+    <meta name="description" content="AI assistants like ChatGPT are good generalists, but they struggle with specialized tasks that require step-by-step expertise. This paper proposes a system that automatically mines open-source code...">
+    <meta property="og:title" content="Automating Skill Acquisition through Large-Scale Mining of Open-Source Agentic Repositories: A Framework for Multi-Agent Procedural Knowledge Extraction — paperplain">
+    <meta property="og:description" content="AI assistants like ChatGPT are good generalists, but they struggle with specialized tasks that require step-by-step expertise. This paper proposes a system that automatically mines open-source code...">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://tashfeenm.github.io/paperplain/papers/2603.11808.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Automating Skill Acquisition through Large-Scale Mining of Open-Source Agentic Repositories: A Framework for Multi-Agent Procedural Knowledge Extraction — paperplain">
+    <meta name="twitter:description" content="AI assistants like ChatGPT are good generalists, but they struggle with specialized tasks that require step-by-step expertise. This paper proposes a system that automatically mines open-source code...">
+    <link rel="canonical" href="https://tashfeenm.github.io/paperplain/papers/2603.11808.html">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,24 +30,39 @@
     </header>
 
     <main class="container">
+        <div class="top-nav">
+            <a href="../index.html">&larr; All papers</a>
+        </div>
+
         <article class="result-section">
             <div class="paper-header">
+                <div class="paper-meta">
+                    <span class="category-tag">AI Agents</span>
+                    <span class="paper-date">March 2026</span>
+                </div>
                 <h2 class="paper-title">Automating Skill Acquisition through Large-Scale Mining of Open-Source Agentic Repositories: A Framework for Multi-Agent Procedural Knowledge Extraction</h2>
                 <p class="paper-authors">Shuzhen Bi, Mengsong Wu, Hao Hao, Keqian Li, Wentao Liu, Siyu Song, Hongbo Zhao, Aimin Zhou</p>
-                <a href="https://arxiv.org/abs/2603.11808" target="_blank" class="paper-link">
-                    View original paper on arxiv (2603.11808)
+                <a href="https://arxiv.org/abs/2603.11808" target="_blank" rel="noopener" class="paper-link">
+                    View original paper on arxiv &nearr;
                 </a>
             </div>
 
+            <nav class="section-toc" aria-label="Sections">
+                <a href="#tldr">TL;DR</a>
+                <a href="#the-idea">The Idea</a>
+                <a href="#why-it-matters">Why It Matters</a>
+                <a href="#whats-missing">What's Missing</a>
+            </nav>
+
             <div class="explanation">
-                <section class="explanation-block">
+                <section id="tldr" class="explanation-block">
                     <h3 class="section-label">TL;DR</h3>
                     <div class="section-content tldr-content">
                     <p>AI assistants like ChatGPT are good generalists, but they struggle with specialized tasks that require step-by-step expertise. This paper proposes a system that automatically mines open-source code repositories on GitHub to extract reusable &quot;skills&quot; -- packaged bundles of know-how that any AI agent can pick up and use without retraining the entire model. Think of it like building a library of recipe cards that any chef can follow, instead of trying to teach every chef every dish from scratch. The researchers demonstrate this by extracting educational video-making skills from two existing projects, whose own benchmarks show 40% better knowledge transfer than baseline approaches.</p>
                     </div>
                 </section>
 
-                <section class="explanation-block">
+                <section id="the-idea" class="explanation-block">
                     <h3 class="section-label">The Idea</h3>
                     <div class="section-content">
                     <p>Today&#x27;s large language models know a lot of facts, but they often fumble when asked to execute a complex, multi-step procedure -- like generating an animated math tutorial or debugging a visualization pipeline. The traditional fix is to retrain or fine-tune the model, which is expensive and slow. This paper proposes a different approach: instead of baking expertise into the model&#x27;s weights, package it as a portable &quot;skill file&quot; that any AI agent can load on demand. It is the difference between surgically implanting a memory versus handing someone an instruction manual.</p>
@@ -47,7 +72,7 @@
                     </div>
                 </section>
 
-                <section class="explanation-block">
+                <section id="why-it-matters" class="explanation-block">
                     <h3 class="section-label">Why It Matters</h3>
                     <div class="section-content">
                     <p>This work addresses a real bottleneck in making AI agents practically useful. Right now, giving an AI assistant a new specialized capability typically means either retraining the model (expensive, slow, requires expertise) or writing custom integrations (labor-intensive, fragile). If you could instead point a system at GitHub and have it automatically extract, package, and verify reusable skills, you dramatically lower the cost of making agents competent in new domains. Domain experts who build great open-source tools -- but never intended them for AI consumption -- suddenly become indirect contributors to the AI skill ecosystem.</p>
@@ -55,7 +80,7 @@
                     </div>
                 </section>
 
-                <section class="explanation-block">
+                <section id="whats-missing" class="explanation-block">
                     <h3 class="section-label">What's Missing</h3>
                     <div class="section-content">
                     <p>The paper&#x27;s demonstration is narrow. Both source repositories (TheoremExplainAgent and Code2Video) are in the same domain -- Manim-based educational animation -- and were likely chosen because their code is well-structured and their outputs are easy to evaluate. The framework&#x27;s effectiveness on messier, less-documented repositories (which is most of GitHub) remains unproven. The 40% knowledge transfer improvement comes from the Code2Video paper&#x27;s own benchmark (TeachQuiz), not from an independent evaluation of the extraction pipeline itself, so it is hard to attribute that gain specifically to the skill extraction process.</p>
@@ -65,20 +90,28 @@
             </div>
         </article>
 
-        <div class="back-link">
-            <a href="../index.html">&larr; All papers</a>
+        <div class="paper-footer-meta">
+            <p>Explained 2026-03-16 using Claude Opus.
+            Found an error? <a href="https://github.com/tashfeenm/paperplain/issues/new?title=Error+in+2603.11808&labels=correction" target="_blank" rel="noopener">Report it</a>.</p>
         </div>
+
+        <nav class="prev-next-nav" aria-label="Paper navigation">
+            <a href="2603.10088.html" class="nav-prev" title="ES-dLLM: Efficient Inference for Diffusion Large Language Models by Early-Skipping">&larr; Previous</a>
+            <span class="nav-next"></span>
+        </nav>
     </main>
 
     <footer>
         <div class="container">
             <p class="disclaimer">
-                Generated by <a href="https://www.anthropic.com" target="_blank">Claude</a>, reviewed by an AI council. May contain errors.
-                Always refer to the <a href="https://arxiv.org/abs/2603.11808" target="_blank">original paper</a>.
+                Generated by <a href="https://www.anthropic.com" target="_blank" rel="noopener">Claude</a>, reviewed by an AI council. May contain errors.
+                Always refer to the <a href="https://arxiv.org/abs/2603.11808" target="_blank" rel="noopener">original paper</a>.
             </p>
             <p class="credits">
-                Built with <a href="https://ds4sd.github.io/docling/" target="_blank">Docling</a>
-                and <a href="https://www.anthropic.com" target="_blank">Claude</a>.
+                <a href="https://github.com/tashfeenm/paperplain" target="_blank" rel="noopener">GitHub</a> &middot;
+                <a href="../feed.xml">RSS</a> &middot;
+                Built with <a href="https://ds4sd.github.io/docling/" target="_blank" rel="noopener">Docling</a>
+                + <a href="https://www.anthropic.com" target="_blank" rel="noopener">Claude</a>
             </p>
         </div>
     </footer>

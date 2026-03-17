@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>paperplain</title>
+    <link>https://tashfeenm.github.io/paperplain/</link>
+    <description>arxiv papers, explained for humans</description>
+    <lastBuildDate>Tue, 17 Mar 2026 00:40:40 +0000</lastBuildDate>
+    <atom:link href="https://tashfeenm.github.io/paperplain/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>LLaDA-o: An Effective and Length-Adaptive Omni Diffusion Model</title>
+      <link>https://tashfeenm.github.io/paperplain/papers/2603.01068.html</link>
+      <guid>https://tashfeenm.github.io/paperplain/papers/2603.01068.html</guid>
+      <description>Most AI models that can both understand images and generate new ones use a single approach for everything, which creates conflicts because text and images are fundamentally different kinds of data. LLaDA-o solves this by using two specialized &quot;experts&quot; under one roof -- one handles text using a technique called masked diffusion (think: filling in blanks), and another handles image creation using continuous diffusion (think: gradually sharpening a blurry picture). The result is a single model that understands images, answers questions about them, and generates new images from text descriptions, achieving state-of-the-art results among diffusion-based models on major benchmarks.</description>
+    </item>
+    <item>
+      <title>Agentic Code Reasoning</title>
+      <link>https://tashfeenm.github.io/paperplain/papers/2603.01896.html</link>
+      <guid>https://tashfeenm.github.io/paperplain/papers/2603.01896.html</guid>
+      <description>When AI agents try to understand code, they often take shortcuts -- guessing what a function does based on its name instead of actually tracing through the logic. Researchers at Meta found that giving AI agents a structured &quot;fill-in-the-blank&quot; template (they call it semi-formal reasoning) forces them to show their work step by step, much like a math teacher requiring students to write out proofs. This simple change boosted accuracy across three different code analysis tasks by 5 to 12 percentage points, all without ever running the code. The best result: 93% accuracy at judging whether two code patches do the same thing (using the strongest model, Opus-4.5).</description>
+    </item>
+    <item>
+      <title>Fish Audio S2 Technical Report</title>
+      <link>https://tashfeenm.github.io/paperplain/papers/2603.08823.html</link>
+      <guid>https://tashfeenm.github.io/paperplain/papers/2603.08823.html</guid>
+      <description>Fish Audio S2 is an open-source text-to-speech system that can take written text and turn it into remarkably human-sounding speech, complete with laughs, whispers, emphasis, and emotional inflections -- all controlled through simple natural-language instructions embedded in the text. It supports over 80 languages, can clone a voice from a short audio sample, handle multi-speaker dialogues in a single pass, and generate long-form audio that stays consistent. In head-to-head comparisons judged by both AI evaluators and human listeners, it proved competitive with leading commercial systems, matching or beating them on several key benchmarks.</description>
+    </item>
+    <item>
+      <title>ES-dLLM: Efficient Inference for Diffusion Large Language Models by Early-Skipping</title>
+      <link>https://tashfeenm.github.io/paperplain/papers/2603.10088.html</link>
+      <guid>https://tashfeenm.github.io/paperplain/papers/2603.10088.html</guid>
+      <description>Most AI language models today generate text one word at a time, left to right. A newer breed called diffusion language models works differently -- they start with a bunch of blank slots and gradually fill them in, like solving a crossword puzzle. The problem is this approach is slow because the model re-examines every single slot on every pass, even the ones that haven&#x27;t changed. This paper shows you can safely skip most of that redundant work, making these models roughly 6 to 17 times faster without hurting the quality of what they write.</description>
+    </item>
+    <item>
+      <title>Automating Skill Acquisition through Large-Scale Mining of Open-Source Agentic Repositories: A Framework for Multi-Agent Procedural Knowledge Extraction</title>
+      <link>https://tashfeenm.github.io/paperplain/papers/2603.11808.html</link>
+      <guid>https://tashfeenm.github.io/paperplain/papers/2603.11808.html</guid>
+      <description>AI assistants like ChatGPT are good generalists, but they struggle with specialized tasks that require step-by-step expertise. This paper proposes a system that automatically mines open-source code repositories on GitHub to extract reusable &quot;skills&quot; -- packaged bundles of know-how that any AI agent can pick up and use without retraining the entire model. Think of it like building a library of recipe cards that any chef can follow, instead of trying to teach every chef every dish from scratch. The researchers demonstrate this by extracting educational video-making skills from two existing projects, whose own benchmarks show 40% better knowledge transfer than baseline approaches.</description>
+    </item>
+  </channel>
+</rss>

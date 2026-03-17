@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agentic Code Reasoning — paperplain</title>
+    <meta name="description" content="When AI agents try to understand code, they often take shortcuts -- guessing what a function does based on its name instead of actually tracing through the logic. Researchers at Meta found that giv...">
+    <meta property="og:title" content="Agentic Code Reasoning — paperplain">
+    <meta property="og:description" content="When AI agents try to understand code, they often take shortcuts -- guessing what a function does based on its name instead of actually tracing through the logic. Researchers at Meta found that giv...">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://tashfeenm.github.io/paperplain/papers/2603.01896.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Agentic Code Reasoning — paperplain">
+    <meta name="twitter:description" content="When AI agents try to understand code, they often take shortcuts -- guessing what a function does based on its name instead of actually tracing through the logic. Researchers at Meta found that giv...">
+    <link rel="canonical" href="https://tashfeenm.github.io/paperplain/papers/2603.01896.html">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,24 +30,39 @@
     </header>
 
     <main class="container">
+        <div class="top-nav">
+            <a href="../index.html">&larr; All papers</a>
+        </div>
+
         <article class="result-section">
             <div class="paper-header">
+                <div class="paper-meta">
+                    <span class="category-tag">AI Agents</span>
+                    <span class="paper-date">March 2026</span>
+                </div>
                 <h2 class="paper-title">Agentic Code Reasoning</h2>
                 <p class="paper-authors">Shubham Ugare, Satish Chandra</p>
-                <a href="https://arxiv.org/abs/2603.01896" target="_blank" class="paper-link">
-                    View original paper on arxiv (2603.01896)
+                <a href="https://arxiv.org/abs/2603.01896" target="_blank" rel="noopener" class="paper-link">
+                    View original paper on arxiv &nearr;
                 </a>
             </div>
 
+            <nav class="section-toc" aria-label="Sections">
+                <a href="#tldr">TL;DR</a>
+                <a href="#the-idea">The Idea</a>
+                <a href="#why-it-matters">Why It Matters</a>
+                <a href="#whats-missing">What's Missing</a>
+            </nav>
+
             <div class="explanation">
-                <section class="explanation-block">
+                <section id="tldr" class="explanation-block">
                     <h3 class="section-label">TL;DR</h3>
                     <div class="section-content tldr-content">
                     <p>When AI agents try to understand code, they often take shortcuts -- guessing what a function does based on its name instead of actually tracing through the logic. Researchers at Meta found that giving AI agents a structured &quot;fill-in-the-blank&quot; template (they call it semi-formal reasoning) forces them to show their work step by step, much like a math teacher requiring students to write out proofs. This simple change boosted accuracy across three different code analysis tasks by 5 to 12 percentage points, all without ever running the code. The best result: 93% accuracy at judging whether two code patches do the same thing (using the strongest model, Opus-4.5).</p>
                     </div>
                 </section>
 
-                <section class="explanation-block">
+                <section id="the-idea" class="explanation-block">
                     <h3 class="section-label">The Idea</h3>
                     <div class="section-content">
                     <p>Imagine you&#x27;re a detective investigating whether two different fixes to the same software bug actually behave the same way. You could glance at both fixes and say &quot;yeah, they look similar enough.&quot; Or you could methodically trace through every line, check what each function actually does, and build a case. Most AI coding agents today do the equivalent of glancing -- they use free-form &quot;chain of thought&quot; reasoning that lets them skip steps and make assumptions. This paper introduces a better approach.</p>
@@ -47,7 +72,7 @@
                     </div>
                 </section>
 
-                <section class="explanation-block">
+                <section id="why-it-matters" class="explanation-block">
                     <h3 class="section-label">Why It Matters</h3>
                     <div class="section-content">
                     <p>The most immediate practical application is making AI training cheaper. Today, when companies train AI coding agents using reinforcement learning, they need to actually run code in sandboxed environments to check if a proposed fix works -- spinning up containers, installing dependencies, executing test suites. That&#x27;s expensive and slow. If an AI verifier can judge patch correctness at 93% accuracy without running anything, it could dramatically reduce the cost of generating training signals. The paper specifically frames this as enabling &quot;execution-free RL reward signals.&quot;</p>
@@ -55,7 +80,7 @@
                     </div>
                 </section>
 
-                <section class="explanation-block">
+                <section id="whats-missing" class="explanation-block">
                     <h3 class="section-label">What's Missing</h3>
                     <div class="section-content">
                     <p>The paper&#x27;s biggest limitation is one the authors acknowledge: SWE-bench (a widely-used benchmark of real software engineering tasks from GitHub) data may appear in the training data of the models being tested. While they argue this affects all configurations equally (so relative comparisons are fair), it means the absolute accuracy numbers -- the headline 93% -- might not hold on truly novel code. The evaluation is also limited to Python and Java repositories from well-known open source projects, leaving open how well this generalizes to less common languages, proprietary codebases, or code that relies heavily on runtime behavior like concurrency or network calls.</p>
@@ -65,20 +90,28 @@
             </div>
         </article>
 
-        <div class="back-link">
-            <a href="../index.html">&larr; All papers</a>
+        <div class="paper-footer-meta">
+            <p>Explained 2026-03-16 using Claude Opus.
+            Found an error? <a href="https://github.com/tashfeenm/paperplain/issues/new?title=Error+in+2603.01896&labels=correction" target="_blank" rel="noopener">Report it</a>.</p>
         </div>
+
+        <nav class="prev-next-nav" aria-label="Paper navigation">
+            <a href="2603.01068.html" class="nav-prev" title="LLaDA-o: An Effective and Length-Adaptive Omni Diffusion Model">&larr; Previous</a>
+            <a href="2603.08823.html" class="nav-next" title="Fish Audio S2 Technical Report">Next &rarr;</a>
+        </nav>
     </main>
 
     <footer>
         <div class="container">
             <p class="disclaimer">
-                Generated by <a href="https://www.anthropic.com" target="_blank">Claude</a>, reviewed by an AI council. May contain errors.
-                Always refer to the <a href="https://arxiv.org/abs/2603.01896" target="_blank">original paper</a>.
+                Generated by <a href="https://www.anthropic.com" target="_blank" rel="noopener">Claude</a>, reviewed by an AI council. May contain errors.
+                Always refer to the <a href="https://arxiv.org/abs/2603.01896" target="_blank" rel="noopener">original paper</a>.
             </p>
             <p class="credits">
-                Built with <a href="https://ds4sd.github.io/docling/" target="_blank">Docling</a>
-                and <a href="https://www.anthropic.com" target="_blank">Claude</a>.
+                <a href="https://github.com/tashfeenm/paperplain" target="_blank" rel="noopener">GitHub</a> &middot;
+                <a href="../feed.xml">RSS</a> &middot;
+                Built with <a href="https://ds4sd.github.io/docling/" target="_blank" rel="noopener">Docling</a>
+                + <a href="https://www.anthropic.com" target="_blank" rel="noopener">Claude</a>
             </p>
         </div>
     </footer>

@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fish Audio S2 Technical Report — paperplain</title>
+    <meta name="description" content="Fish Audio S2 is an open-source text-to-speech system that can take written text and turn it into remarkably human-sounding speech, complete with laughs, whispers, emphasis, and emotional inflectio...">
+    <meta property="og:title" content="Fish Audio S2 Technical Report — paperplain">
+    <meta property="og:description" content="Fish Audio S2 is an open-source text-to-speech system that can take written text and turn it into remarkably human-sounding speech, complete with laughs, whispers, emphasis, and emotional inflectio...">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://tashfeenm.github.io/paperplain/papers/2603.08823.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Fish Audio S2 Technical Report — paperplain">
+    <meta name="twitter:description" content="Fish Audio S2 is an open-source text-to-speech system that can take written text and turn it into remarkably human-sounding speech, complete with laughs, whispers, emphasis, and emotional inflectio...">
+    <link rel="canonical" href="https://tashfeenm.github.io/paperplain/papers/2603.08823.html">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,24 +30,39 @@
     </header>
 
     <main class="container">
+        <div class="top-nav">
+            <a href="../index.html">&larr; All papers</a>
+        </div>
+
         <article class="result-section">
             <div class="paper-header">
+                <div class="paper-meta">
+                    <span class="category-tag">Speech Synthesis</span>
+                    <span class="paper-date">March 2026</span>
+                </div>
                 <h2 class="paper-title">Fish Audio S2 Technical Report</h2>
                 <p class="paper-authors">Shijia Liao, Yuxuan Wang, Songting Liu, Yifan Cheng, Ruoyi Zhang, Tianyu Li, Shidong Li, Yisheng Zheng, Xingwei Liu, Qingzheng Wang, Zhizhuo Zhou, Jiahua Liu, Xin Chen, Dawei Han</p>
-                <a href="https://arxiv.org/abs/2603.08823" target="_blank" class="paper-link">
-                    View original paper on arxiv (2603.08823)
+                <a href="https://arxiv.org/abs/2603.08823" target="_blank" rel="noopener" class="paper-link">
+                    View original paper on arxiv &nearr;
                 </a>
             </div>
 
+            <nav class="section-toc" aria-label="Sections">
+                <a href="#tldr">TL;DR</a>
+                <a href="#the-idea">The Idea</a>
+                <a href="#why-it-matters">Why It Matters</a>
+                <a href="#whats-missing">What's Missing</a>
+            </nav>
+
             <div class="explanation">
-                <section class="explanation-block">
+                <section id="tldr" class="explanation-block">
                     <h3 class="section-label">TL;DR</h3>
                     <div class="section-content tldr-content">
                     <p>Fish Audio S2 is an open-source text-to-speech system that can take written text and turn it into remarkably human-sounding speech, complete with laughs, whispers, emphasis, and emotional inflections -- all controlled through simple natural-language instructions embedded in the text. It supports over 80 languages, can clone a voice from a short audio sample, handle multi-speaker dialogues in a single pass, and generate long-form audio that stays consistent. In head-to-head comparisons judged by both AI evaluators and human listeners, it proved competitive with leading commercial systems, matching or beating them on several key benchmarks.</p>
                     </div>
                 </section>
 
-                <section class="explanation-block">
+                <section id="the-idea" class="explanation-block">
                     <h3 class="section-label">The Idea</h3>
                     <div class="section-content">
                     <p>Today&#x27;s best text-to-speech systems can read text aloud clearly, but getting them to sound truly human -- with natural laughs, hesitations, whispers, and emotional shifts at exactly the right moments -- remains a hard problem. Fish Audio S2 tackles this by letting users embed plain-English instructions like [laugh], [whisper], or [angry] directly into the text, telling the system exactly where and how to modulate the voice. Think of it like writing stage directions in a screenplay: instead of just the dialogue, you include cues that tell the actor how to deliver each line.</p>
@@ -47,7 +72,7 @@
                     </div>
                 </section>
 
-                <section class="explanation-block">
+                <section id="why-it-matters" class="explanation-block">
                     <h3 class="section-label">Why It Matters</h3>
                     <div class="section-content">
                     <p>This is one of the most capable open-source text-to-speech systems released to date, and the &quot;open-source&quot; part matters enormously. Until now, the most natural-sounding and controllable speech synthesis was locked behind commercial APIs from companies like OpenAI, Google, and ElevenLabs. Fish Audio S2 puts comparable quality into the hands of any developer or researcher who wants to build on it. The model weights, fine-tuning code, and production-ready inference engine are all publicly available.</p>
@@ -55,7 +80,7 @@
                     </div>
                 </section>
 
-                <section class="explanation-block">
+                <section id="whats-missing" class="explanation-block">
                     <h3 class="section-label">What's Missing</h3>
                     <div class="section-content">
                     <p>The paper is forthright about some limitations but glosses over others. On the benchmark front, the team created their own &quot;Fish Audio Instruction Benchmark&quot; to evaluate fine-grained control -- which is useful, but self-designed benchmarks always carry a risk of favoring the system they were built alongside. The human-model alignment validation for this benchmark shows only &quot;moderate agreement&quot; (Cohen&#x27;s kappa of 0.47 for acoustic-event detection) between the AI judge (Gemini 3 Pro) and human evaluators, which means the automated scores should be taken with some caution.</p>
@@ -65,20 +90,28 @@
             </div>
         </article>
 
-        <div class="back-link">
-            <a href="../index.html">&larr; All papers</a>
+        <div class="paper-footer-meta">
+            <p>Explained 2026-03-16 using Claude Opus.
+            Found an error? <a href="https://github.com/tashfeenm/paperplain/issues/new?title=Error+in+2603.08823&labels=correction" target="_blank" rel="noopener">Report it</a>.</p>
         </div>
+
+        <nav class="prev-next-nav" aria-label="Paper navigation">
+            <a href="2603.01896.html" class="nav-prev" title="Agentic Code Reasoning">&larr; Previous</a>
+            <a href="2603.10088.html" class="nav-next" title="ES-dLLM: Efficient Inference for Diffusion Large Language Models by Early-Skipping">Next &rarr;</a>
+        </nav>
     </main>
 
     <footer>
         <div class="container">
             <p class="disclaimer">
-                Generated by <a href="https://www.anthropic.com" target="_blank">Claude</a>, reviewed by an AI council. May contain errors.
-                Always refer to the <a href="https://arxiv.org/abs/2603.08823" target="_blank">original paper</a>.
+                Generated by <a href="https://www.anthropic.com" target="_blank" rel="noopener">Claude</a>, reviewed by an AI council. May contain errors.
+                Always refer to the <a href="https://arxiv.org/abs/2603.08823" target="_blank" rel="noopener">original paper</a>.
             </p>
             <p class="credits">
-                Built with <a href="https://ds4sd.github.io/docling/" target="_blank">Docling</a>
-                and <a href="https://www.anthropic.com" target="_blank">Claude</a>.
+                <a href="https://github.com/tashfeenm/paperplain" target="_blank" rel="noopener">GitHub</a> &middot;
+                <a href="../feed.xml">RSS</a> &middot;
+                Built with <a href="https://ds4sd.github.io/docling/" target="_blank" rel="noopener">Docling</a>
+                + <a href="https://www.anthropic.com" target="_blank" rel="noopener">Claude</a>
             </p>
         </div>
     </footer>

@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ES-dLLM: Efficient Inference for Diffusion Large Language Models by Early-Skipping — paperplain</title>
+    <meta name="description" content="Most AI language models today generate text one word at a time, left to right. A newer breed called diffusion language models works differently -- they start with a bunch of blank slots and gradual...">
+    <meta property="og:title" content="ES-dLLM: Efficient Inference for Diffusion Large Language Models by Early-Skipping — paperplain">
+    <meta property="og:description" content="Most AI language models today generate text one word at a time, left to right. A newer breed called diffusion language models works differently -- they start with a bunch of blank slots and gradual...">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://tashfeenm.github.io/paperplain/papers/2603.10088.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="ES-dLLM: Efficient Inference for Diffusion Large Language Models by Early-Skipping — paperplain">
+    <meta name="twitter:description" content="Most AI language models today generate text one word at a time, left to right. A newer breed called diffusion language models works differently -- they start with a bunch of blank slots and gradual...">
+    <link rel="canonical" href="https://tashfeenm.github.io/paperplain/papers/2603.10088.html">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,24 +30,39 @@
     </header>
 
     <main class="container">
+        <div class="top-nav">
+            <a href="../index.html">&larr; All papers</a>
+        </div>
+
         <article class="result-section">
             <div class="paper-header">
+                <div class="paper-meta">
+                    <span class="category-tag">Efficient AI</span>
+                    <span class="paper-date">March 2026</span>
+                </div>
                 <h2 class="paper-title">ES-dLLM: Efficient Inference for Diffusion Large Language Models by Early-Skipping</h2>
                 <p class="paper-authors">Zijian Zhu, Fei Ren, Zhanhong Tan, Kaisheng Ma</p>
-                <a href="https://arxiv.org/abs/2603.10088" target="_blank" class="paper-link">
-                    View original paper on arxiv (2603.10088)
+                <a href="https://arxiv.org/abs/2603.10088" target="_blank" rel="noopener" class="paper-link">
+                    View original paper on arxiv &nearr;
                 </a>
             </div>
 
+            <nav class="section-toc" aria-label="Sections">
+                <a href="#tldr">TL;DR</a>
+                <a href="#the-idea">The Idea</a>
+                <a href="#why-it-matters">Why It Matters</a>
+                <a href="#whats-missing">What's Missing</a>
+            </nav>
+
             <div class="explanation">
-                <section class="explanation-block">
+                <section id="tldr" class="explanation-block">
                     <h3 class="section-label">TL;DR</h3>
                     <div class="section-content tldr-content">
                     <p>Most AI language models today generate text one word at a time, left to right. A newer breed called diffusion language models works differently -- they start with a bunch of blank slots and gradually fill them in, like solving a crossword puzzle. The problem is this approach is slow because the model re-examines every single slot on every pass, even the ones that haven&#x27;t changed. This paper shows you can safely skip most of that redundant work, making these models roughly 6 to 17 times faster without hurting the quality of what they write.</p>
                     </div>
                 </section>
 
-                <section class="explanation-block">
+                <section id="the-idea" class="explanation-block">
                     <h3 class="section-label">The Idea</h3>
                     <div class="section-content">
                     <p>Standard language models (like ChatGPT) write one word at a time, always moving forward. Diffusion language models take a different approach: they start with a sequence of blank tokens and iteratively &quot;unmask&quot; them, choosing which blanks to fill in based on how confident the model is about each position. Think of it like a sculptor working on an entire statue at once, gradually refining every part, rather than carving it left to right.</p>
@@ -47,7 +72,7 @@
                     </div>
                 </section>
 
-                <section class="explanation-block">
+                <section id="why-it-matters" class="explanation-block">
                     <h3 class="section-label">Why It Matters</h3>
                     <div class="section-content">
                     <p>Diffusion language models are generating real excitement because they can look at context in both directions and potentially generate multiple words at once, which standard left-to-right models cannot do. Companies like Google (Gemini Diffusion) and Inception Labs (Mercury) have shown these models can be blazingly fast. But the open-source versions have been painfully slow, undermining the whole premise. ES-dLLM closes a significant chunk of that gap without requiring anyone to retrain their model -- it&#x27;s a plug-and-play upgrade.</p>
@@ -55,7 +80,7 @@
                     </div>
                 </section>
 
-                <section class="explanation-block">
+                <section id="whats-missing" class="explanation-block">
                     <h3 class="section-label">What's Missing</h3>
                     <div class="section-content">
                     <p>The paper is honest about a key limitation: even though ES-dLLM cuts the raw computation (FLOPs -- a measure of the total mathematical operations performed) by about 60%, the actual wall-clock speedup over the previous best method is 1.2x to 1.85x, not the 2.5x you might expect. The reason is that once you reduce computation enough, the bottleneck shifts from math operations to memory bandwidth -- the model still needs to load its weights and cached values from memory regardless of how many tokens it skips. The authors acknowledge this but don&#x27;t solve it.</p>
@@ -66,20 +91,28 @@
             </div>
         </article>
 
-        <div class="back-link">
-            <a href="../index.html">&larr; All papers</a>
+        <div class="paper-footer-meta">
+            <p>Explained 2026-03-16 using Claude Opus.
+            Found an error? <a href="https://github.com/tashfeenm/paperplain/issues/new?title=Error+in+2603.10088&labels=correction" target="_blank" rel="noopener">Report it</a>.</p>
         </div>
+
+        <nav class="prev-next-nav" aria-label="Paper navigation">
+            <a href="2603.08823.html" class="nav-prev" title="Fish Audio S2 Technical Report">&larr; Previous</a>
+            <a href="2603.11808.html" class="nav-next" title="Automating Skill Acquisition through Large-Scale Mining of Open-Source Agentic Repositories: A Framework for Multi-Agent Procedural Knowledge Extraction">Next &rarr;</a>
+        </nav>
     </main>
 
     <footer>
         <div class="container">
             <p class="disclaimer">
-                Generated by <a href="https://www.anthropic.com" target="_blank">Claude</a>, reviewed by an AI council. May contain errors.
-                Always refer to the <a href="https://arxiv.org/abs/2603.10088" target="_blank">original paper</a>.
+                Generated by <a href="https://www.anthropic.com" target="_blank" rel="noopener">Claude</a>, reviewed by an AI council. May contain errors.
+                Always refer to the <a href="https://arxiv.org/abs/2603.10088" target="_blank" rel="noopener">original paper</a>.
             </p>
             <p class="credits">
-                Built with <a href="https://ds4sd.github.io/docling/" target="_blank">Docling</a>
-                and <a href="https://www.anthropic.com" target="_blank">Claude</a>.
+                <a href="https://github.com/tashfeenm/paperplain" target="_blank" rel="noopener">GitHub</a> &middot;
+                <a href="../feed.xml">RSS</a> &middot;
+                Built with <a href="https://ds4sd.github.io/docling/" target="_blank" rel="noopener">Docling</a>
+                + <a href="https://www.anthropic.com" target="_blank" rel="noopener">Claude</a>
             </p>
         </div>
     </footer>
